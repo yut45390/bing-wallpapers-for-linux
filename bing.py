@@ -15,12 +15,14 @@ day="&idx=0"
 market="&mkt=en-GB"
 # API Constant (fetch how many).
 const="&n=1"
+#extension
+extn=".jpg"
 # Size.
 size="1920x1200"
 
 
 reqImg=bing + api + format + day + market + const
-print(reqImg)
+
 r = requests.get(reqImg)
 if r.status_code != 200:
     print("request status code is %d" % r.status_code)
@@ -33,6 +35,7 @@ os.makedirs(pathbase,exist_ok=True)
 img=data['images'][-1]
 imageUrl=bing+img['url']
 urlbase=img['urlbase']
+print(bing+urlbase+"_"+size+extn)
 key="id="
 id_index = urlbase.find(key) + len(key)
 imageName=os.path.join(pathbase,urlbase[id_index:]+'.jpg')
